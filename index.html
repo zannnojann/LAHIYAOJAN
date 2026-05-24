@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GWJIR</title>
+
+  <!-- Font Modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icon Social Media -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ========== Global Reset ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      color: #1f2a37;
+      background:
+        radial-gradient(circle at top left, rgba(180, 210, 255, 0.65), transparent 35%),
+        radial-gradient(circle at top right, rgba(223, 214, 255, 0.75), transparent 30%),
+        linear-gradient(135deg, #f8fbff 0%, #edf4ff 45%, #f7f4ff 100%);
+      overflow-x: hidden;
+    }
+
+    /* ========== Background Blur Orbs ========== */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 220px;
+      height: 220px;
+      background: #bcdcff;
+      top: 8%;
+      left: -60px;
+    }
+
+    .orb.two {
+      width: 260px;
+      height: 260px;
+      background: #d9ccff;
+      bottom: 10%;
+      right: -80px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+
+    /* ========== Navbar ========== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.45);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #22324a;
+      letter-spacing: 0.4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #506178;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #6f63d8;
+    }
+
+    /* ========== Main Layout ========== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 24px 56px;
+      animation: fadeIn 0.9s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 18px 40px rgba(89, 108, 152, 0.12);
+      border-radius: 28px;
+    }
+
+    /* ========== Profile Card ========== */
+    .profile-card {
+      padding: 34px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(89, 108, 152, 0.16);
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 30px rgba(102, 119, 158, 0.18);
+      flex-shrink: 0;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(111, 99, 216, 0.09);
+      color: #6f63d8;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .status i {
+      font-size: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      color: #1d2a3b;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #627085;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    /* ========== Action Buttons ========== */
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7d8cff, #b6a6ff);
+      color: #fff;
+      box-shadow: 0 14px 25px rgba(125, 140, 255, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.68);
+      color: #44556d;
+      border-color: rgba(148, 163, 184, 0.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ========== Side Summary ========== */
+    .summary-card {
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .summary-item {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      transition: 0.3s ease;
+    }
+
+    .summary-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .summary-label {
+      font-size: 0.85rem;
+      color: #7a8599;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #203047;
+    }
+
+    /* ========== Sections Grid ========== */
+    .sections {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .section-card {
+      padding: 26px;
+      transition: 0.35s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      color: #1e2d42;
+    }
+
+    .section-title i {
+      color: #6f63d8;
+    }
+
+    .section-text {
+      color: #5f6d82;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(126, 145, 255, 0.12);
+      color: #5060a8;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: 1px solid rgba(126, 145, 255, 0.14);
+      transition: 0.3s ease;
+    }
+
+    .chip:hover {
+      background: rgba(126, 145, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    /* ========== Social Buttons ========== */
+    .socials {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: #2a3c56;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      transition: 0.3s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      color: #6f63d8;
+      box-shadow: 0 12px 22px rgba(93, 104, 132, 0.12);
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      color: #6c7689;
+      font-size: 0.9rem;
+      margin-top: 26px;
+      padding-bottom: 10px;
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 900px) {
+      .hero,
+      .sections {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 22px 16px 44px;
+      }
+
+      .profile-card,
+      .section-card,
+      .summary-card {
+        padding: 22px;
+      }
+
+      .profile-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 96px;
+        height: 96px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Decorative Shapes -->
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="brand">Profil Gw Jir</div>
+      <div class="nav-links">
+        <a href="#tentang">Tentang</a>
+        <a href="#hobi">Hobi</a>
+        <a href="#games">Games</a>
+        <a href="#kampus">Kampus</a>
+        <a href="#sosmed">Sosmed</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <!-- Profile Card -->
+      <div class="glass-card profile-card">
+        <div class="profile-top">
+          <!-- Foto Profil -->
+          <img
+            class="avatar"
+            src="https://assets.promediateknologi.id/crop/25x49:676x735/1200x0/webp/photo/2022/11/29/2775198021.jpg"
+            alt="Foto Profil"
+          />
+
+          <div>
+            <div class="status">
+              <i class="fa-solid fa-circle"></i>
+                Online pi boonk
+            </div>
+            <h1>OJANJIR</h1>
+            <p class="subtitle"> Suka banget main epep, main sampe lupa waktu lhoyaa, main epep tu bikin iq lu nambah tau wkwokkakawkwk.</p>
+             <p class="subtitle">
+            </p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#sosmed">
+            <i class="fa-solid fa-paper-plane"></i>
+            Social Media
+          </a>
+          <a class="btn btn-secondary" href="#tentang">
+            <i class="fa-solid fa-user"></i>
+            Lihat Profil
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Info -->
+      <aside class="glass-card summary-card">
+        <div class="summary-item">
+          <div class="summary-label">Sekolah</div>
+          <div class="summary-value">SMAN 6 Karawang</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Dream University</div>
+          <div class="summary-value">UNS — Teknik Informatika</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Style</div>
+          <div class="summary-value">JEDAG JEDUG ASEKK</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="sections">
+      <!-- Tentang Saya -->
+      <article class="glass-card section-card" id="tentang">
+        <h2 class="section-title">
+          <i class="fa-solid fa-address-card"></i>
+          Tentang Gw Jir
+        </h2>
+        <p class="section-text">
+         Gw adalah seorang cowok yang suka banget ngegame, apalagi kalo game perang-perangan gitu. Kalo lagi gabut, paling enak main game buat santai. Gw juga punya mimpi buat kuliah di UNS jurusan Teknik Informatika biar bisa lebih paham soal teknologi dan siap hadapi dunia digital yang makin maju.
+        </p>
+      </article>
+
+      <!-- Hobi -->
+      <article class="glass-card section-card" id="hobi">
+        <h2 class="section-title">
+          <i class="fa-solid fa-gamepad"></i>
+          Hobi
+        </h2>
+        <p class="section-text">
+          Hobi utama gw pastinya main game, terutama EPEPPPP yang genre action dan battle royale. Selain itu, gw juga suka banget dengerin musik buat nemenin waktu santai atau lagi main game.
+        </p>
+        <div class="chips">
+          <span class="chip">Gaming</span>
+          <span class="chip">Santai</span>
+          <span class="chip">Bantai Bantai</span>
+        </div>
+      </article>
+
+      <!-- Favorite Games -->
+      <article class="glass-card section-card" id="games">
+        <h2 class="section-title">
+          <i class="fa-solid fa-dice-d6"></i>
+          Favorite Games & Music
+        </h2>
+        <p class="section-text">
+          Game favorit gw adalah Free Fire, Arena Breakout, dan Mobile Legends. Lagu lagu favorit gw banyak sii kaya Sephia, 2112, YCCMANYW, Dan, Tunjukkan Padaku, sama yang pasti YAITU DJ BREAKBEAT JEDAG JEDUG ASEKK.
+        </p>
+        <div class="chips">
+          <span class="chip">Free Fire</span>
+          <span class="chip">Arena Breakout</span>
+          <span class="chip">Mobile Legends</span>
+          <span class="chip">Sephia</span>
+          <span class="chip">2112</span>
+          <span class="chip">YCCMANYW</span>
+          <span class="chip">Dan</span>
+          <span class="chip">Tunjukkan Padaku</span>
+          <span class="chip">DJ BREAKBEAT JEDAG JEDUG ASEKK</span>
+        </div>
+      </article>
+
+      <!-- Dream University -->
+      <article class="glass-card section-card" id="kampus">
+        <h2 class="section-title">
+          <i class="fa-solid fa-graduation-cap"></i>
+          Dream University
+        </h2>
+        <p class="section-text">
+          Dream university gw adalah UNS dengan prodi Teknik Informatika.
+          Gw ingin berkembang di bidang teknologi dan jadi lebih siap di dunia digital.
+        </p>
+      </article>
+
+      <!-- Social Media -->
+      <article class="glass-card section-card" id="sosmed">
+        <h2 class="section-title">
+          <i class="fa-solid fa-link"></i>
+          Sosmed Gw Nih 
+        </h2>
+        <p class="section-text">
+            Jangan lupa follow ya mbud nanti gw kasih tau cara bikin website keren kayak gini, biar kalian juga bisa pamerin profil kece kalian ke temen-temen.
+        </p>
+
+        <div class="socials">
+          <a class="social-btn" href="https://www.instagram.com/lahpaujan?igsh=cXEwczhyMmZtMmpq" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@paujanskibidi?_r=1&_t=ZS-96d7HPaWBbI" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a class="social-btn" href="https://whatsapp.com/channel/0029Vb6Qm9zJuyA3lQBVy528" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2026 — OJANJIR. All rights reserved.
+    </div>
+  </main>
+</body>
+</html>
